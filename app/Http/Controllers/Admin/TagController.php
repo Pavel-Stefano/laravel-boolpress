@@ -19,7 +19,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::paginate(10);
+        $tags = Tag::paginate(5);
         return view('admin.tags.index', compact('tags'));
     }
 
@@ -107,9 +107,22 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $tag->tags()->sync([]);
+        // $tag->tags()->sync([]);      non funziona
 
         $tag->delete();
         return redirect()->route('admin.tags.index')->with("message", "tag with id: {$tag->id} successfully deleted !");
+    }
+
+
+    private function getSlug($name) {
+        $slug = Str::of($name)->slug("-");
+        $count = 1;
+
+        while( Tag::where("slug", $slug)->first() ) {
+            $slug = Str::of($name)->slug("-") . "-{$count}";
+            $count++;
+        }
+        return $slug;
+
     }
 }
