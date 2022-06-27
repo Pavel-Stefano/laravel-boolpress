@@ -93,7 +93,8 @@ class CarController extends Controller
     public function edit(Car $car)
     {
         $categories = Category::all();
-        return view('admin.cars.edit', compact('car','categories'));
+        $tags = Tag::all();
+        return view('admin.cars.edit', compact('car','categories', 'tags'));
     }
 
     /**
@@ -119,6 +120,12 @@ class CarController extends Controller
         $car->description = $data['description'];
         $car->available = isset($data['available']);
         $car->update();
+
+        if(isset($data['tags'])){
+            $car->tags()->sync($data['tags']);
+        }else {
+            $car->tags()->sync([]);
+        }
         return redirect()->route('admin.cars.show', $car->id);
 
     }
@@ -131,6 +138,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        $car->tags()->sync([]);
+
         $car->delete();
         return redirect()->route('admin.cars.index')->with("message", "Car with id: {$car->id} successfully deleted !");
     }

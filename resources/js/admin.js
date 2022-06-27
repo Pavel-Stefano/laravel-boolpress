@@ -31,13 +31,13 @@ const app = new Vue({
     el: '#app',
     data: {
         currentForm:null,
-        carId:null,
+        itemId:null,
     },
     methods:{
         openModal(e,id){
             e.preventDefault();
             // console.log(id);
-            this.carId = id;
+            this.itemId = id;
             // console.log(e.currentTarget);
             this.currentForm = e.currentTarget.parentNode;
             // console.log(this.currentForm);

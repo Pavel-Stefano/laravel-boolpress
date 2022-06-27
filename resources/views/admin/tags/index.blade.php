@@ -23,31 +23,29 @@
   </div>
 </div>
 
-<a href="{{route('admin.cars.create')}}" class="btn btn-prymary">Aggiungi nuova auto </a>
+<a href="{{route('admin.tags.create')}}" class="btn btn-prymary">Aggiungi tag </a>
 
 <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Model</th>
         <th scope="col">Modifica</th>
         <th scope="col">Cancella</th>
         {{-- <th scope="col">Disponibile</th> --}}
       </tr>
     </thead>
     <tbody>
-    @foreach ($cars as $car)
+    @foreach ($tags as $tag)
     <tr>
-      <td> <a href="{{route('admin.cars.show', $car->id)}}">{{$car->id}} </a></td>
-      <td> <a href="{{route('admin.cars.show', $car->id)}}">{{$car->name}} </a></td>
-      <td> <a href="{{route('admin.cars.show', $car->id)}}">{{$car->model}} </a></td>
-      <td> <a href="{{route('admin.cars.edit', $car->id)}}" class="btn btn-info">Modifica </a></td>
+      <td> <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->id}} </a></td>
+      <td> <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}} </a></td>
+      <td> <a href="{{route('admin.tags.edit', $tag->id)}}" class="btn btn-info">Modifica </a></td>
       <td> 
-        <form action="{{route('admin.cars.destroy', $car->id)}}" method="POST">
+        <form action="{{route('admin.tags.destroy', $tag->id)}}" method="POST">
           @csrf
           @method('DELETE')
-          <button type="submit" @@click="openModal($event, {{$car->id}})" class="btn btn-warning delete">Delete</button>
+          <button type="submit" @@click="openModal($event, {{$tag->id}})" class="btn btn-warning delete">Delete</button>
         </form>
       </td>
 
@@ -58,6 +56,6 @@
       
     </tbody>
   </table>
-  {{ $cars->links() }}
+  {{ $tags->links() }}
     
 @endsection

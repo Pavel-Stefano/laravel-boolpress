@@ -18,6 +18,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/admin') }}">Home</a>
+                        <a href="{{ url('/admin/cars') }}">Cars</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

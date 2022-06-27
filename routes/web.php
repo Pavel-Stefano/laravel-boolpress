@@ -25,6 +25,8 @@ Route::middleware('auth')
     ->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('/cars', 'CarController');
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/tags', 'TagController');
 });
 
 Route::get("{any?}", function() {
