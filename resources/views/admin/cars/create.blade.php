@@ -2,7 +2,7 @@
 {{-- @dump($tags) --}}
 
 @section('content')
-<form action={{route('admin.cars.store')}} method="POST">
+<form action={{route('admin.cars.store')}} method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
@@ -29,6 +29,13 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
+      <label for="image" >Aggiungi immagine</label>
+      <input type="file" id="image" name="image" onchange="boolpress.previewImage();">
+    </div>
+
+
     <div class="mb-3">
       <div class="form-group">
         <h5>Tags</h5>
@@ -49,5 +56,7 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
 @endsection

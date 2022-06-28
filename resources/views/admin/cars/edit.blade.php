@@ -34,7 +34,34 @@
       @enderror
     </div>
 
-    
+    <div class="form-group">
+      @if ($car->image)
+      <img id="uploadPreview" width="100" src="{{ asset("storage/{$car->image}")}}" alt="{{$car->name}}">
+      @else
+      <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
+      @endif
+      <label for="image" >Aggiungi immagine</label>
+      <input type="file" id="image" name="image" onchange="boolpress.previewImage();">
+    </div>
+
+
+
+    <div class="mb-3">
+      <div class="form-group">
+        <h5>Tags</h5>
+        
+          @foreach($tags as $tag)
+          <div class="form-check-inline">
+            @if (old("tags"))
+            <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{in_array($tag->id, old("tags", [])) ? 'checked' : ''}}>
+            @else
+            <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{($car->tags->contains($tag)) ? 'checked' : ''}}>
+            @endif
+            <label class="form-check-label" for="{{$tag->slug}}">{{$tag->slug}} </label>
+          </div>
+          @endforeach
+      </div>
+    </div>
 
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="available" name="available" {{old('available') ? 'checked' : ''}}>
@@ -43,4 +70,6 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 @endsection

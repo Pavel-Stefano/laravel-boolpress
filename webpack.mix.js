@@ -19,4 +19,4 @@ mix.js('resources/js/admin.js', 'public/js')
     mix.js('resources/js/front.js', 'public/js')
     .sass('resources/sass/front.scss', 'public/css').options({
         processCssUrls: false
-    })
+    });

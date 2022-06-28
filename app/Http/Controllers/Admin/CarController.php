@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Car;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Car;
 use App\Category;
 use App\Tag;
 
@@ -18,6 +19,7 @@ class CarController extends Controller
         "available" => "sometimes|accepted",
         "category_id" => "nullable|exists:categories,id",
         "tags" => "nullable|exists:tags,id",
+        "image" => "nullable|image|mimes:jpeg,bmp,png,svg|max:2048",
     ];
 
 
@@ -65,6 +67,12 @@ class CarController extends Controller
         $newCar->category_id = $data['category_id'];
        
         $newCar->slug = $this->getSlug($newCar->name);
+        $newCar->save();
+
+        if(isset($data['image'])){
+            $path_image = Storage::put("uploads", $data['image']);
+            $newCar->image = $path_image;
+        }
         $newCar->save();
 
         if(isset($data['tags'])){
@@ -119,6 +127,11 @@ class CarController extends Controller
         $car->category_id = $data['category_id'];
         $car->description = $data['description'];
         $car->available = isset($data['available']);
+        if(isset($data['image'])){
+            Storage::delete($car->image);
+            $path_image = Storage::put("uploads", $data['image']);
+            $car->image = $path_image;
+        }
         $car->update();
 
         if(isset($data['tags'])){

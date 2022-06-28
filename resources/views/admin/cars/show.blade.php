@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@include('partials/popupdelete')
 {{-- @dump($car->tags) --}}
 
 @section('content')
@@ -8,7 +8,7 @@
     @if($car->category)
         <h4>Alimentazione: {{$car->category['name']}}</h4>
     @endif
-    <p>Descrizione: {{$car->description}}</p>
+    <p>Descrizione: {!! $car->description !!}</p>
     <h5>Disponibile: {{$car->available  ? 'si' : 'no'}}</h5>
     <small>creato il: {{$car->created_at}}</small>
     <ul>
@@ -16,4 +16,5 @@
             <li>{{$item->name}}</li>
         @endforeach
     </ul>
+    <button type="submit" onclick="boolpress.openModal(event, {{$car->id}})" class="btn btn-warning delete">Delete</button>
 @endsection
