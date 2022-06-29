@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form action="{{route('admin.cars.update', $car->id)}}" method="POST">
+<form action="{{route('admin.cars.update', $car->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mb-3">

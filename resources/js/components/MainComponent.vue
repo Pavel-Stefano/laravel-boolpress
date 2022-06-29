@@ -1,13 +1,6 @@
 <template>
     <main>
-        <h1>main</h1>
-        <ul>
-            <li v-for="(car, index) in cars" :key="index">
-                {{ car.name}}
-                <a href="#" @click="getDetail(car.slug, index)"> vedi dettaglio</a>
-                <!-- <span v-if="car.detail">{{car.detail.slug}}</span> -->
-            </li>
-        </ul>
+        <router-view></router-view>
        
     </main>
 </template>
@@ -22,23 +15,19 @@ export default {
         }
     },
     methods: {
-        getDetail(slug, index){
-            axios.get('/api/cars/'+ slug).then((response)=>{
-            // console.log(response.data);
-            this.cars[index].detail = response.data;
-            console.log(this.cars[index], 'detail')
-        })
-        }
+      
     },
-    created(){
-        axios.get('/api/cars').then((response)=>{
-            console.log(response.data);
-            this.cars = response.data;
-        })
-    }
+    // created(){
+    //     axios.get('/api/cars').then((response)=>{
+    //         console.log(response.data);
+    //         this.cars = response.data;
+    //     })
+    // }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 
 </style>
+
+// php artisan migrate --path=/database/migrations/2022_06_29_093759_create_comments_table.php

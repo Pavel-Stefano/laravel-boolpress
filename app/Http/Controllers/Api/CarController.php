@@ -10,13 +10,11 @@ class CarController extends Controller
 {
     public function index(){
         $cars = Car::all();
-
         return response()->json($cars);
     }
 
     public function show($slug){
         $car = Car::where("slug",$slug)->with(["category", "tags"])->first();
-
         return response()->json($car);
     }
 }

@@ -8,6 +8,13 @@
     @if($car->category)
         <h4>Alimentazione: {{$car->category['name']}}</h4>
     @endif
+    @if ($car->image)
+        <div class="text-center w-25 mt-3">
+            <img src="{{ asset('storage/' . $car->image) }}" class="rounded "
+                alt="{{ $car->title }}">
+        </div>
+    @endif
+
     <p>Descrizione: {!! $car->description !!}</p>
     <h5>Disponibile: {{$car->available  ? 'si' : 'no'}}</h5>
     <small>creato il: {{$car->created_at}}</small>
@@ -18,3 +25,5 @@
     </ul>
     <button type="submit" onclick="boolpress.openModal(event, {{$car->id}})" class="btn btn-warning delete">Delete</button>
 @endsection
+
+
