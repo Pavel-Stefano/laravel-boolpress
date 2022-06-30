@@ -28,6 +28,8 @@ export default {
         axios.get('/api/cars').then((response)=> {
             console.log(response.data);
             this.cars = response.data;
+        }).catch((error) => {
+            console.log(error);
         })
     }
  

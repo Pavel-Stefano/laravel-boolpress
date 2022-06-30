@@ -22,3 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/cars', 'Api\CarController@index');
 Route::get('/cars/{slug}', 'Api\CarController@show');
+
+// rotta salvataggio commenti
+Route::post('/comments', 'Api\CommentController@store');

@@ -19,7 +19,7 @@ class CarController extends Controller
         "available" => "sometimes|accepted",
         "category_id" => "nullable|exists:categories,id",
         "tags" => "nullable|exists:tags,id",
-        "image" => "nullable|image|mimes:jpeg,bmp,png,svg|ma:2048",
+        "image" => "nullable|mimes:jpeg,bmp,png,svg,jpg"
     ];
 
 
@@ -57,7 +57,7 @@ class CarController extends Controller
     {
         $request->validate($this->validationRule);
         $data = $request->all();
-        dd($data);
+        // dd($data);
 
         $newCar = new Car();
         $newCar->name = $data['name'];

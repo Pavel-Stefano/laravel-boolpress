@@ -18,6 +18,7 @@ export default {
         MainComponent,
         HeaderComponent,
         FooterComponent,
+      
         
 
     }

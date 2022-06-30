@@ -9,6 +9,7 @@ import AboutComponent from './pages/AboutComponent';
 import CarsComponent from './pages/CarsComponent';
 import ContactComponent from './pages/ContactComponent';
 import SingleCarComponent from './pages/SingleCarComponent';
+import NotFoundComponent from './pages/NotFoundComponent.vue'
 
 
 const router = new VueRouter({
@@ -42,6 +43,12 @@ const router = new VueRouter({
             path: '/cars/:slug',
             name: 'single-car',
             component: SingleCarComponent
+
+        },
+        {
+            path: '*',
+            name: 'page-404',
+            component: NotFoundComponent
 
         },
     ]

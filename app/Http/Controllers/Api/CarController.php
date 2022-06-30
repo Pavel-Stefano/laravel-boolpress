@@ -14,7 +14,10 @@ class CarController extends Controller
     }
 
     public function show($slug){
-        $car = Car::where("slug",$slug)->with(["category", "tags"])->first();
+        $car = Car::where("slug",$slug)->with(["category", "tags", "comments"])->first();
+        if(empty($car)){
+            return response()->json(['messagge' => 'car not found'], 404);
+        }
         return response()->json($car);
     }
 }
